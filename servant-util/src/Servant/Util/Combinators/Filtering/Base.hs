@@ -27,18 +27,27 @@ module Servant.Util.Combinators.Filtering.Base
     , FilteringParamTypesOf
     , FilteringParamsOf
     , FilteringSpecOf
+
+    , encodeQueryParamValue
     ) where
 
 import Universum
 
 import qualified Data.Map as M
 import Data.Typeable (cast)
+import Data.ByteString.Builder (toLazyByteString)
+import qualified Data.ByteString.Lazy as BL
 import Fmt (Buildable (..), Builder)
 import GHC.Exts (IsList)
 import Servant (FromHttpApiData (..), ToHttpApiData (..))
 import Servant.API (NoContent)
 
 import Servant.Util.Common
+
+-- available from servant-client-core since
+-- https://github.com/haskell-servant/servant/pull/1549
+encodeQueryParamValue :: ToHttpApiData a => a  -> ByteString
+encodeQueryParamValue = BL.toStrict . toLazyByteString . toEncodedUrlPiece
 
 -- | We support two kinds of filters.
 data FilterKind a
@@ -112,7 +121,7 @@ class (Typeable filter, BuildableAutoFilter filter) =>
     -- | Encode a filter to query parameter value.
     autoFilterEncode
         :: ToHttpApiData a
-        => filter a -> (Text, Text)
+        => filter a -> (Text, ByteString)
 
     mapAutoFilterValue
         :: (a -> b) -> filter a -> filter b

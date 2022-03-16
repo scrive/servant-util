@@ -117,6 +117,6 @@ instance IsAutoFilter FilterLike where
     autoFilterEncode = \case
         FilterLike cs (unLikePattern -> pat)
             | CaseSensitivity True <- cs
-                -> ("like", toQueryParam pat)
+                -> ("like", encodeQueryParamValue pat)
             | otherwise
-                -> ("ilike", toQueryParam pat)
+                -> ("ilike", encodeQueryParamValue pat)

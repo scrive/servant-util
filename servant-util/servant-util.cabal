@@ -111,6 +111,7 @@ library
       QuickCheck
     , aeson
     , base >=4.7 && <5
+    , bytestring
     , constraints
     , containers
     , data-default
@@ -125,7 +126,7 @@ library
     , reflection
     , regex-posix
     , safe-exceptions
-    , servant
+    , servant ==0.19
     , servant-client
     , servant-client-core
     , servant-openapi3
@@ -201,7 +202,7 @@ executable servant-util-examples
     , reflection
     , regex-posix
     , safe-exceptions
-    , servant
+    , servant ==0.19
     , servant-client
     , servant-client-core
     , servant-openapi3
@@ -292,7 +293,7 @@ test-suite servant-util-test
     , reflection
     , regex-posix
     , safe-exceptions
-    , servant
+    , servant ==0.19
     , servant-client
     , servant-client-core
     , servant-openapi3
