@@ -79,7 +79,7 @@ sortingSpec = mkSortingSpec [asc #id]
 mkSortingSpec
     :: ReifySortingItems base
     => [SortingRequestItem provided] -> SortingSpec provided base
-mkSortingSpec = fromList
+mkSortingSpec = GHC.Exts.fromList
 
 -- | By default 'noSorting' is used.
 instance ReifySortingItems base => Default (SortingSpec provided base) where
