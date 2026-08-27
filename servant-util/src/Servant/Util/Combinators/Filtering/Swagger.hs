@@ -6,7 +6,6 @@ module Servant.Util.Combinators.Filtering.Swagger () where
 import Universum
 
 import Control.Lens ((<>~))
-import qualified Data.HashMap.Strict.InsOrd as HM
 import qualified Data.OpenApi as O
 import qualified Data.Swagger as S
 import qualified Data.Text as T
@@ -46,7 +45,7 @@ filterOpenApiParam name desc =
     , O._paramAllowReserved = Nothing
     , O._paramStyle = Just O.StyleDeepObject
     , O._paramExample = Nothing
-    , O._paramExamples = HM.empty
+    , O._paramExamples = mempty
     , O._paramExplode = Just True
     , O._paramSchema = Just . O.Inline $ O.toParamSchema (Proxy @a)
     }
